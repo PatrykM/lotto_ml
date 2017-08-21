@@ -10,21 +10,21 @@ class Game
   validates :result, uniqueness: { scope: :draw_date }
 
   # Custom validations
-  validate :result_is_in_range,:result_length
-  
+  validate :result_is_in_range, :result_length
+
   # Result numbers are in game range
   def result_is_in_range
-    errors.add(:result, "Nieprawidłowe liczby w losowaniu") if !result.all? { |res| game_range.include?(res) }
+    errors.add(:result, 'Nieprawidłowe liczby w losowaniu') unless result.all? { |res| game_range.include?(res) }
   end
-  
+
   # Result has valid lenght
   def result_length
-    errors.add(:result, "Nieprawidłowa ilość liczb w losowaniu") if result.length != draw_count
+    errors.add(:result, 'Nieprawidłowa ilość liczb w losowaniu') if result.length != draw_count
   end
 
   # Game format - how long are data. To implement
   def game_format; end
-  
+
   # Game range - range of numbers used in the game. To implement
   def game_range; end
 
@@ -35,6 +35,6 @@ class Game
 
   # Return games not assigned to any cycle and sort them by game date
   def self.without_cycle
-    where(:cycle_id.exists => false).order_by(:draw_date => 'asc').to_a
+    where(:cycle_id.exists => false).order_by(draw_date: 'asc').to_a
   end
 end

@@ -13,15 +13,16 @@ class Cycle
 
   def initialize
     super
-    self.stages = Array.new
+    self.stages = []
   end
 
   # Find cycles in given games
   def find_new(without_cycle)
     stage = new_or_last_stage(without_cycle)
-    
+
     without_cycle.each do |game|
-      calculate_stage(game,stage)
+      calculate_stage(game, stage)
+      game.save
       # Check if cycle is done, if not copy last stage
       stages.last.include?(0) ? stage = Array.new(stage) : break
     end
@@ -39,14 +40,14 @@ class Cycle
   # Return unfinished cycle for a given game_type, for example LottoGame
   def self.unfinished(game_type)
     # self.all.detect { |cycle| cycle.stages.last.include?(0) } || Cycle.new
-    self.where(game_type: game_type.to_s).detect { |cycle| cycle.stages.last.include?(0) }
+    where(game_type: game_type.to_s).detect { |cycle| cycle.stages.last.include?(0) }
   end
 
   # Find all cycles for a given game_type, for example LottoGame
   def self.find_in_games(game_type)
     games_without_cycle = game_type.without_cycle
     games_without_cycle_new = []
-  
+
     while games_without_cycle != games_without_cycle_new
       cycle = unfinished(game_type) || Cycle.new
       # Change it to initialize
@@ -61,18 +62,18 @@ class Cycle
 
   # First stage array with initialized with 0's or with last stage of existing cycle
   def new_or_last_stage(without_cycle)
-    if new_record?
-      stage = Array.new(without_cycle.first.game_range.max,0)
-    else
-      stage = Array.new(stages.last)
-    end
+    stage = if new_record?
+              Array.new(without_cycle.first.game_range.max, 0)
+            else
+              Array.new(stages.last)
+            end
     stage
   end
 
   # Calculate stage and add to stages
-  def calculate_stage(game,stage)
+  def calculate_stage(game, stage)
     game.cycle = self
-    game.result.each { |result| stage[result-1]+=1 }
+    game.result.each { |result| stage[result - 1] += 1 }
     stages << stage
   end
 end
