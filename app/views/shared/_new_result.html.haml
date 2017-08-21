@@ -1,0 +1,17 @@
+= form_for(game, as: :game_data) do |f|
+  .row
+    .col-md-4
+      .form-group
+        .btn-group{"data-toggle" => "buttons", :id => "result-buttons"}
+          - game.game_range.each do |num|
+            %label.label-static.btn.btn-default{:id => "result_#{num}"}
+              = check_box_tag "game_data[result][]", num, false, {:id => "result_checkbox_#{num}"}
+              = num
+  .row
+    .form-group
+      .col-md-4.text-left
+        = f.date_field "draw_date", value: Date.today
+  .row.gap-20
+    .col-md-4.text-left
+      = f.submit "Dodaj", class: "btn btn-success"
+    

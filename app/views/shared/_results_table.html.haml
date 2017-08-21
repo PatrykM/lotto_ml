@@ -1,0 +1,14 @@
+.row
+  .col-md-6
+    %table.table.table-striped
+      %thead
+        %tr
+          %th Data
+          %th.text-right Wynik losowania
+      %tbody
+        - games.each do |game|
+          %tr
+            %td= game.draw_date
+            %td= game.result.join(", ")
+    = paginate games
+      

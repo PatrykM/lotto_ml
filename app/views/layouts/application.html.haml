@@ -1,0 +1,56 @@
+!!!
+%html
+  %head
+    %meta{:charset => "utf-8"}
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+    %title LottoMl
+    = csrf_meta_tags
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    %nav.navbar.navbar-inverse.navbar-fixed-top
+      .container-fluid
+        / Brand and toggle get grouped for better mobile display
+        .navbar-header
+          %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand{:href => "#"} LottoML
+        / Collect the nav links, forms, and other content for toggling
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          %ul.nav.navbar-nav
+            %li.dropdown
+              %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+                Lotto
+                %span.caret
+              %ul.dropdown-menu
+                %li
+                  = link_to "Wyniki", lotto_games_path
+                %li
+                  = link_to "Dodaj losowanie", new_lotto_game_path(@lotto_game)
+                %li
+            %li.dropdown
+              %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+                Multi
+                %span.caret
+              %ul.dropdown-menu
+                %li
+                  = link_to "Wyniki", multi_games_path
+                %li
+                  = link_to "Dodaj losowanie", new_multi_game_path(@multi_game)
+                %li
+    .container
+      .starter-template
+        - flash.each do |name, msg|
+          .div{class: "alert alert-#{name} alert-dismissible", role: "alert"}
+            %button{:type => "button", :class => "close", "data-dismiss" => "alert", "aria-label" => "Close"}
+              %span{"aria-hidden" => "true"}x
+            = msg
+        = yield
+         
+         
+         
