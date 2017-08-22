@@ -1,12 +1,14 @@
 # Class Cycle is responsible for finding cycles in game results
 class Cycle
   include Mongoid::Document
-  # Field stages holds all next stages of the cycle. Each entry is an array itself.
+  # Field stages holds all next stages of the cycle.
+  # Each entry is an array itself.
   # Each entry array length is the max number of the game range
   # For example LottoGame cycle stages looks like this:
   # Each entry array has 49 fields - max number in LottoGame
   # First entry array is initialized with 0's
-  # Next stages adds to previous one. Cycle is finished where there is no 0's in last array
+  # Next stages adds to previous one.
+  # Cycle is finished where there is no 0's in last array
   field :stages, type: Array
   field :game_type, type: String
   has_many :games
@@ -39,8 +41,9 @@ class Cycle
 
   # Return unfinished cycle for a given game_type, for example LottoGame
   def self.unfinished(game_type)
-    # self.all.detect { |cycle| cycle.stages.last.include?(0) } || Cycle.new
-    where(game_type: game_type.to_s).detect { |cycle| cycle.stages.last.include?(0) }
+    where(game_type: game_type.to_s).detect do |cycle|
+      cycle.stages.last.include?(0)
+    end
   end
 
   # Find all cycles for a given game_type, for example LottoGame
@@ -60,7 +63,8 @@ class Cycle
 
   private
 
-  # First stage array with initialized with 0's or with last stage of existing cycle
+  # First stage array with initialized with 0's or
+  # with last stage of existing cycle
   def new_or_last_stage(without_cycle)
     stage = if new_record?
               Array.new(without_cycle.first.game_range.max, 0)

@@ -1,0 +1,26 @@
+#inherit_from: .rubocop_todo.yml
+Metrics/LineLength:
+  # This will disable the rule completely, regardless what other options you put
+  Enabled: false
+  # Change the default 80 chars limit value
+  Max: 80
+  # If you want the rule only apply to a specific folder/file
+  Include:
+    - 'app/**/*'
+  # If you want the rule not to apply to a specific folder/file
+  Exclude:
+    - 'config/*'
+    - 'test/**/*'
+
+Metrics/BlockLength:
+  Enabled: true
+  Exclude: 
+    - 'test/**/*'
+    - 'spec/**/*'
+
+# Disable false positive on fixtures folder (...) interpreted as grouped expression.
+Lint/ParenthesesAsGroupedExpression:
+  Exclude:
+    - 'spec/factories/*'
+
+

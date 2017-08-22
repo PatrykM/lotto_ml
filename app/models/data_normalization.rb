@@ -10,12 +10,12 @@ class DataNormalization
   # Find max value in data set and divide all data by max
   # After normalization all data in data set should be in range 0-1
   def by_maximum
-    (@data_set.first.is_a? Hash) ? by_maximum_hash : by_maximum_table
+    @data_set.first.is_a?(Hash) ? by_maximum_hash : by_maximum_table
   end
 
   # Find average value in data set and divide all data by avg
   def by_average
-    (@data_set.first.is_a? Hash) ? by_average_hash : by_average_table
+    @data_set.first.is_a?(Hash) ? by_average_hash : by_average_table
   end
 
   def min_max
@@ -58,7 +58,9 @@ class DataNormalization
 
   # Normalize data as a hash
   def normalize_hash
-    prepare_hash.map { |hash| hash.map { |key, value| [key / @norm, value / @norm] }.to_h }
+    prepare_hash.map do |hash|
+      hash.map { |key, value| [key / @norm, value / @norm] }.to_h
+    end
   end
 
   # In LottoGame and MultiGame max is always the same

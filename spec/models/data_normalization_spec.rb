@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe DataNormalization, type: :model do
-  describe 'data normalization'
+
   let(:data_set_before_normalization) do
     [
       8, 12, 31, 39, 43, 45,
