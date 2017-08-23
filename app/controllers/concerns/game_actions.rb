@@ -21,8 +21,9 @@ module GameActions
       redirect_to public_send("#{game_type}_path"),
                   flash: { success: 'Losowanie zostało dodane' }
     else
-      redirect_to public_send("new_#{game_type.singularize}_path(#{@game})"),
-                  flash: { danger: 'Losowanie nie zostało dodane' }
+      redirect_to public_send("new_#{game_type.singularize}_path"),
+                  flash: { danger: "Losowanie nie zostało dodane.
+                          #{@game.errors[:result].to_sentence}" }
     end
   end
 

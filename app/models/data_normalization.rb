@@ -1,7 +1,6 @@
 # Normalization class used to normalize input and output data for NN
 class DataNormalization
   attr_reader :norm
-
   # Initialize object with data for normalization
   def initialize(data_set)
     @data_set = data_set
