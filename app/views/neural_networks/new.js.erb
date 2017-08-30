@@ -1,0 +1,20 @@
+// render results partial
+$('#results').html('<%= escape_javascript(render :partial => "shared/results_table_form", :locals => {:games => @games }) %>');
+// check selected results
+$(function(){
+	var result;
+	for(i=0;i<results_list.length;i++){
+		result=document.getElementById(results_list[i]);
+		if (result != null && result != undefined) {
+			document.getElementById(results_list[i]).checked = true;
+		}
+		document.getElementById("results_list").value = results_list.join(",");
+	}
+});
+
+// zamiast zmiennej globalnej uzyc ukrytego pola.
+// powyzszy kod dziala tylko przy przelaczaniu paginacj
+// wiec jezeli wybierzemy tylko z pierwszej stronu to nie dodane
+// zostana do tej zmiennej
+
+

@@ -43,6 +43,16 @@
                 %li
                   = link_to "Dodaj losowanie", new_multi_game_path(@multi_game)
                 %li
+            %li.dropdown
+              %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+                Sieci neuronowe
+                %span.caret
+              %ul.dropdown-menu
+                %li
+                  = link_to "Pokaż wszystkie", neural_networks_path
+                %li
+                  = link_to "Dodaj sieć", new_neural_network_path
+                %li
     .container
       .starter-template
         - flash.each do |name, msg|

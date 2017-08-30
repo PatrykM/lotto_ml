@@ -16,4 +16,5 @@
 //= require js.cookie
 //= require game_validation_jquery
 //= require turbolinks
+//= require neural_networks
 
