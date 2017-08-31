@@ -1,13 +1,12 @@
-.row#results
-  .col-md-7.col-md-offset-2
-    %table.table.table-striped
-      %thead
+.row#results 
+  %table.table.table-striped
+    %thead
+      %tr
+        %th{:colspan => "2"} Wybierz losowania do nauki sieci
+    %tbody
+      - games.each do |game|
         %tr
-          %th{:colspan => "2"} Wybierz losowania do nauki sieci
-      %tbody
-        - games.each do |game|
-          %tr
-            %td.col-md-1= check_box_tag game.id
-            %td.col-md-6= game.result.join(", ")
-    = paginate games, remote: true
-      
+          %td.col-md-1= check_box_tag game.id
+          %td.col-md-6= game.result.join(", ")
+  = paginate games, remote: true
+    

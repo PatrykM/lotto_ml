@@ -5,10 +5,11 @@ class NeuralNetworksController < ApplicationController
   end
 
   def new
-    # to implement
-    @neural_network = ''
-    @games = MultiGame.all.page params[:page]
-    #if selected_game.all.page params[:page]
+    @games = if !params[:game_type].nil?
+               params[:game_type].constantize.all.page params[:page]
+             else
+               MultiGame.all.page params[:page]
+             end
   end
 
   def create
@@ -24,7 +25,7 @@ class NeuralNetworksController < ApplicationController
   # Return results from game selected by user
   def selected_game
     game_type = params['neural_network_data']['game_type']
-    return LottoGame if game_type == "lotto_game"
-    return MultiGame if game_type == "multi_game"
+    return LottoGame if game_type == 'lotto_game'
+    return MultiGame if game_type == 'multi_game'
   end
 end
