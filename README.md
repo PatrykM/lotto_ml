@@ -1,3 +1,5 @@
+[![Code Climate](https://codeclimate.com/github/PatrykM/lotto_ml/badges/gpa.svg)](https://codeclimate.com/github/PatrykM/lotto_ml)
+
 # README
 
 This README would normally document whatever steps are necessary to get the
