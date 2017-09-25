@@ -11,7 +11,25 @@ class NeuralNetworkFann < NeuralNetwork
 
   # Output methods
   def output(input_data)
-    @neural_net.run(super).collect { |result| (result * @norm) }
+    @neural_net.run(super).collect { |result| (result * norm) }
+  end
+
+  # Save network
+  def save
+    network_dumper = NetworkDumper.new
+    @neural_net.save(network_dumper.file_name.to_s)
+    self.dump = network_dumper.file_md5
+    super
+  end
+
+  # Load saved network
+  def load_network
+    @neural_net = RubyFann::Standard.new(filename: dump)
+  end
+
+  # Output only type of the network
+  def ntype
+    'ruby-fann'
   end
 
   private

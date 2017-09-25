@@ -20,8 +20,6 @@
             .radio
               %label
                 = radio_button_tag("neural_network_data[game_type]", "lotto_game", false, data: { href: '/neural_networks/new?game_type=LottoGame' }, class: 'game_type')
-                -#<a rel="prev" data-remote="true" href="/neural_networks/new?game_type=LottoGame">LottoGame</a>
-                -#= f.radio_button "game_type", "lotto_game"
                 LottoGame
             .radio
               %label

@@ -1,0 +1,13 @@
+.row
+  .col-md-4.col-md-offset-2
+    %table.table.table-striped
+      %thead
+        %tr
+          %th Typ sieci
+          %th.text-right Link
+      %tbody
+        - @networks.each do |network|
+          %tr
+            %td.text-left= network.ntype
+            %td.text-right= link_to "zobacz", neural_network_path(network)
+

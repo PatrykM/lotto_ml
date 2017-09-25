@@ -4,6 +4,9 @@ class Game
   field :draw_date, type: DateTime
   field :result, type: Array
   belongs_to :cycle, optional: true
+  has_and_belongs_to_many :neural_networks
+
+  scope :by_ids, ->(ids) { where(:id.in => ids).order_by(draw_date: 'asc') }
 
   validates_presence_of :draw_date, :result
   # Duplication of the results.

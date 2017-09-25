@@ -1,0 +1,32 @@
+.row
+  .col-md-8
+    %table.table.table-bordered
+      %thead
+        %tr
+          %th
+            Typ sieci
+          %th
+            Gra
+          %th
+            Losowania wybrane do nauki sieci
+      %tbody
+        %tr
+          %td= @neural_network.ntype
+          %td Typ gry
+          %td
+            - @neural_network.games.map(&:result).each do |game|
+              %p=game
+.row
+  .col-md-8
+    = form_tag('',method: :get) do
+      = text_field_tag(:test_data, nil, class: "form-control", placeholder: "wpisz dane do przetestowania sieci np. 1,2,3,4 w poprawnej ilości dla danego typu gry" )
+      %br
+      = submit_tag "Sprawdź wynik", class: "btn btn-success"
+%br
+.row
+  .col-md-8#test_result
+    = render 'shared/test_result', test_result: @test_result
+
+
+
+
