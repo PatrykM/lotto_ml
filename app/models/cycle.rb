@@ -9,14 +9,9 @@ class Cycle
   # First entry array is initialized with 0's
   # Next stages adds to previous one.
   # Cycle is finished where there is no 0's in last array
-  field :stages, type: Array
+  field :stages, type: Array, default: []
   field :game_type, type: String
   has_many :games
-
-  def initialize
-    super
-    self.stages = []
-  end
 
   # Find cycles in given games
   def find_new(without_cycle)
